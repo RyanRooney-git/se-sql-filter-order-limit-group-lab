@@ -131,7 +131,7 @@ df_teams_years = pd.read_sql("""
 # STEP 12
 # Replace None with your code
 df_at_bats = pd.read_sql("""
-    SELECT Team, SUM(AtBats) AS total_at_bats
+    SELECT Team, SUM(AB) AS total_at_bats
     FROM babe_ruth_stats
     GROUP BY Team
 """, conn3)
