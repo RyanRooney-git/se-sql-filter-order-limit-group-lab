@@ -12,25 +12,45 @@ pd.read_sql("""SELECT * FROM planets; """, conn1)
 
 # STEP 1
 # Replace None with your code
-df_no_moons = None
+df_no_moons = pd.read_sql("""SELECT * FROM planets
+                        WHERE num_of_moons = 0;
+                        """, conn1)
+print(df_no_moons)
 
 # STEP 2
 # Replace None with your code
-df_name_seven = None
+df_name_seven = pd.read_sql("""SELECT substr(name, 1, 7) AS name, mass
+                            FROM planets
+                            WHERE LENGTH(name) = 7
+                            """, conn1)
+print(df_name_seven)
 
 ##### Part 2: Advanced Filtering #####
 
 # STEP 3
 # Replace None with your code
-df_mass = None
+df_mass = pd.read_sql("""SELECT name, mass
+                      FROM planets
+                      WHERE mass <= 1.00
+                      """, conn1)
+print(df_mass)
 
 # STEP 4
 # Replace None with your code
-df_mass_moon = None
+df_mass_moon = pd.read_sql("""SELECT * 
+                           FROM planets
+                           WHERE num_of_moons >= 1 AND mass < 1.00
+                           """, conn1)
+print(df_mass_moon)
+
 
 # STEP 5
 # Replace None with your code
-df_blue = None
+df_blue = pd.read_sql("""SELECT *
+                      FROM planets
+                      WHERE color = 'blue'
+                      """, conn1)
+print(df_blue)
 
 ##### Part 3: Ordering and Limiting #####
 
@@ -45,16 +65,31 @@ pd.read_sql("SELECT * FROM dogs;", conn2)
 
 # STEP 6
 # Replace None with your code
-df_hungry = None
+df_hungry = pd.read_sql("""SELECT name, age, breed
+                        FROM dogs
+                        WHERE hungry = 1
+                        ORDER BY age ASC
+                        """, conn2)
+print(df_hungry)
 
 # STEP 7
 # Replace None with your code
-df_hungry_ages = None
+df_hungry_ages = pd.read_sql("""SELECT name, age, hungry
+                            FROM dogs
+                            WHERE hungry = 0
+                            AND age between 2 AND 7
+                            ORDER BY name
+                            """, conn2)
+print(df_hungry_ages)
 
 # STEP 8
 # Replace None with your code
-df_4_oldest = None
-
+df_4_oldest = pd.read_sql("""SELECT name, age, breed
+                          FROM dogs
+                          ORDER by age DESC
+                          LIMIT 4
+                        """, conn2)
+print(df_4_oldest)
 
 ##### Part 4: Aggregation #####
 
@@ -70,23 +105,36 @@ SELECT * FROM babe_ruth_stats; """, conn3)
 
 # STEP 9
 # Replace None with your code
-df_ruth_years = None
+df_ruth_years = pd.read_sql("""
+                        SELECT COUNT(*) AS years_played
+                        FROM babe_ruth_stats
+                    """, conn3)
 
 # STEP 10
 # Replace None with your code
-df_hr_total = None
+df_hr_total = pd.read_sql("""
+                        SELECT SUM(HR) AS total_home_runs
+                        FROM babe_ruth_stats
+                    """, conn3)
 
 
 ##### Part 5: Grouping and Aggregation #####
 
 # STEP 11
 # Replace None with your code
-df_teams_years = None
+df_teams_years = pd.read_sql("""
+                        SELECT Team, COUNT(*) AS years_played
+                        FROM babe_ruth_stats
+                        GROUP BY Team
+                    """, conn3)
 
 # STEP 12
 # Replace None with your code
-df_at_bats = None
-
+df_at_bats = pd.read_sql("""
+                    SELECT Team, SUM(AB) AS total_at_bats
+                    FROM babe_ruth_stats
+                    GROUP BY Team
+                """, conn3)
 
 conn1.close()
 conn2.close()
