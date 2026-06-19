@@ -12,15 +12,16 @@ pd.read_sql("""SELECT * FROM planets; """, conn1)
 
 # STEP 1
 # Replace None with your code
-df_no_moons = pd.read_sql("""SELECT name, mass, rings
+df_no_moons = pd.read_sql("""SELECT name, mass 
                         FROM planets
-                        WHERE num_of_moons = 0;
+                        WHERE num_of_moons >= 1
+                        AND mass < 1.00;
                         """, conn1)
 print(df_no_moons)
 
 # STEP 2
 # Replace None with your code
-df_name_seven = pd.read_sql("""SELECT *
+df_name_seven = pd.read_sql("""SELECT substr(name, 1, 7) AS name, mass
                             FROM planets
                             WHERE LENGTH(name) = 7
                             """, conn1)
@@ -38,12 +39,10 @@ print(df_mass)
 
 # STEP 4
 # Replace None with your code
-df_mass_moon = pd.read_sql("""
-    SELECT *
-    FROM planets
-    WHERE num_of_moons >= 1
-    AND mass < 1.00
-""", conn1)
+df_mass_moon = pd.read_sql("""SELECT * 
+                           FROM planets
+                           WHERE num_of_moons >= 1 AND mass < 1.00
+                           """, conn1)
 print(df_mass_moon)
 
 
@@ -77,22 +76,21 @@ print(df_hungry)
 
 # STEP 7
 # Replace None with your code
-df_hungry_ages = pd.read_sql("""
-    SELECT name, age, hungry
-    FROM dogs
-    WHERE hungry = 1
-    AND age BETWEEN 2 AND 7
-    ORDER BY name
-""", conn2)
+df_hungry_ages = pd.read_sql("""SELECT name, age, hungry
+                            FROM dogs
+                            WHERE hungry = 0
+                            AND age between 2 AND 7
+                            ORDER BY name
+                            """, conn2)
 print(df_hungry_ages)
 
 # STEP 8
 # Replace None with your code
 df_4_oldest = pd.read_sql("""
-    SELECT name, age, breed
+    SELECT age
     FROM dogs
     ORDER BY age DESC
-    LIMIT 4
+    LIMIT 5
 """, conn2)
 print(df_4_oldest)
 
@@ -137,12 +135,8 @@ print(df_teams_years)
 
 # STEP 12
 # Replace None with your code
-df_at_bats = pd.read_sql("""
-    SELECT Team, AVG(AB) AS average_at_bats
-    FROM babe_ruth_stats
-    GROUP BY Team
-    HAVING AVG(AB) > 200
-""", conn3)
+df_at_bats = None
+
 
 conn1.close()
 conn2.close()
