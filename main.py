@@ -109,14 +109,15 @@ df_ruth_years = pd.read_sql("""
                         SELECT COUNT(*) AS years_played
                         FROM babe_ruth_stats
                     """, conn3)
+print(df_ruth_years)
 
 # STEP 10
 # Replace None with your code
 df_hr_total = pd.read_sql("""
-                        SELECT SUM(HR) AS total_home_runs
-                        FROM babe_ruth_stats
+                    SELECT SUM(HR) AS total_home_runs
+                    FROM babe_ruth_stats
                     """, conn3)
-
+print(df_hr_total)
 
 ##### Part 5: Grouping and Aggregation #####
 
@@ -127,14 +128,12 @@ df_teams_years = pd.read_sql("""
                         FROM babe_ruth_stats
                         GROUP BY Team
                     """, conn3)
+print(df_teams_years)
 
 # STEP 12
 # Replace None with your code
-df_at_bats = pd.read_sql("""
-    SELECT Team, SUM(AB) AS total_at_bats
-    FROM babe_ruth_stats
-    GROUP BY Team
-""", conn3)
+df_at_bats = None
+
 
 conn1.close()
 conn2.close()
