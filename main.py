@@ -20,7 +20,8 @@ print(df_no_moons)
 
 # STEP 2
 # Replace None with your code
-df_name_seven = pd.read_sql("""SELECT substr(name, 1, 7) AS name, mass
+df_name_seven = pd.read_sql("""
+                            SELECT name, mass
                             FROM planets
                             WHERE LENGTH(name) = 7
                             """, conn1)
@@ -49,7 +50,8 @@ print(df_mass_moon)
 
 # STEP 5
 # Replace None with your code
-df_blue = pd.read_sql("""SELECT *
+df_blue = pd.read_sql("""
+                      SELECT name, color
                       FROM planets
                       WHERE color = 'blue'
                       """, conn1)
@@ -77,10 +79,11 @@ print(df_hungry)
 
 # STEP 7
 # Replace None with your code
-df_hungry_ages = pd.read_sql("""SELECT name, age, hungry
+df_hungry_ages = pd.read_sql("""
+                            SELECT name, age, hungry
                             FROM dogs
                             WHERE hungry = 1
-                            AND age between 3 AND 6
+                            AND age between 2 AND 7
                             ORDER BY name
                             """, conn2)
 print(df_hungry_ages)
