@@ -80,7 +80,7 @@ print(df_hungry)
 df_hungry_ages = pd.read_sql("""SELECT name, age, hungry
                             FROM dogs
                             WHERE hungry = 1
-                            AND age between 2 AND 7
+                            AND age between 3 AND 6
                             ORDER BY name
                             """, conn2)
 print(df_hungry_ages)
@@ -91,7 +91,7 @@ df_4_oldest = pd.read_sql("""
     SELECT name, age, breed
     FROM dogs
     ORDER BY age DESC
-    LIMIT 5
+    LIMIT 4
 """, conn2)
 print(df_4_oldest)
 
