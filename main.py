@@ -38,10 +38,12 @@ print(df_mass)
 
 # STEP 4
 # Replace None with your code
-df_mass_moon = pd.read_sql("""SELECT * 
-                           FROM planets
-                           WHERE num_of_moons >= 1 AND mass < 1.00
-                           """, conn1)
+df_mass_moon = pd.read_sql("""
+    SELECT *
+    FROM planets
+    WHERE num_of_moons = 1 AND mass < 1.00
+    AND mass < 1.00
+""", conn1)
 print(df_mass_moon)
 
 
@@ -75,12 +77,13 @@ print(df_hungry)
 
 # STEP 7
 # Replace None with your code
-df_hungry_ages = pd.read_sql("""SELECT name, age, hungry
-                            FROM dogs
-                            WHERE hungry = 0
-                            AND age between 2 AND 7
-                            ORDER BY name
-                            """, conn2)
+df_hungry_ages = pd.read_sql("""
+    SELECT name, age, hungry
+    FROM dogs
+    WHERE hungry = 1
+    AND age BETWEEN 2 AND 7
+    ORDER BY name
+""", conn2)
 print(df_hungry_ages)
 
 # STEP 8
@@ -89,7 +92,7 @@ df_4_oldest = pd.read_sql("""
     SELECT age
     FROM dogs
     ORDER BY age DESC
-    LIMIT 4
+    LIMIT 5
 """, conn2)
 print(df_4_oldest)
 
