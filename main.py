@@ -12,14 +12,15 @@ pd.read_sql("""SELECT * FROM planets; """, conn1)
 
 # STEP 1
 # Replace None with your code
-df_no_moons = pd.read_sql("""SELECT * FROM planets
-                        WHERE num_of_moons = 0;
+df_no_moons = pd.read_sql("""SELECT name, mass 
+                        FROM planets
+                        WHERE mass <= 1.00;
                         """, conn1)
 print(df_no_moons)
 
 # STEP 2
 # Replace None with your code
-df_name_seven = pd.read_sql("""SELECT substr(name, 1, 7) AS name, mass
+df_name_seven = pd.read_sql("""SELECT *
                             FROM planets
                             WHERE LENGTH(name) = 7
                             """, conn1)
@@ -84,11 +85,12 @@ print(df_hungry_ages)
 
 # STEP 8
 # Replace None with your code
-df_4_oldest = pd.read_sql("""SELECT name, age, breed
-                          FROM dogs
-                          ORDER by age DESC
-                          LIMIT 4
-                        """, conn2)
+df_4_oldest = pd.read_sql("""
+    SELECT age
+    FROM dogs
+    ORDER BY age DESC
+    LIMIT 4
+""", conn2)
 print(df_4_oldest)
 
 ##### Part 4: Aggregation #####
@@ -124,16 +126,20 @@ print(df_hr_total)
 # STEP 11
 # Replace None with your code
 df_teams_years = pd.read_sql("""
-                        SELECT Team, COUNT(*) AS years_played
-                        FROM babe_ruth_stats
-                        GROUP BY Team
-                    """, conn3)
+    SELECT Team, COUNT(*) AS number_years
+    FROM babe_ruth_stats
+    GROUP BY Team
+""", conn3)
 print(df_teams_years)
 
 # STEP 12
 # Replace None with your code
-df_at_bats = None
-
+df_at_bats = pd.read_sql("""
+    SELECT Team, AVG(At_Bats) AS average_at_bats
+    FROM babe_ruth_stats
+    GROUP BY Team
+    HAVING AVG(At_Bats) > 200
+""", conn3)
 
 conn1.close()
 conn2.close()
