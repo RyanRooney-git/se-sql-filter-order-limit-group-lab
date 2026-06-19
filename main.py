@@ -12,9 +12,9 @@ pd.read_sql("""SELECT * FROM planets; """, conn1)
 
 # STEP 1
 # Replace None with your code
-df_no_moons = pd.read_sql("""SELECT name, mass 
+df_no_moons = pd.read_sql("""SELECT name, mass, rings
                         FROM planets
-                        WHERE mass <= 1.00;
+                        WHERE num_of_moons = 0;
                         """, conn1)
 print(df_no_moons)
 
@@ -41,7 +41,7 @@ print(df_mass)
 df_mass_moon = pd.read_sql("""
     SELECT *
     FROM planets
-    WHERE num_of_moons = 1 AND mass < 1.00
+    WHERE num_of_moons >= 1
     AND mass < 1.00
 """, conn1)
 print(df_mass_moon)
@@ -89,10 +89,10 @@ print(df_hungry_ages)
 # STEP 8
 # Replace None with your code
 df_4_oldest = pd.read_sql("""
-    SELECT age
+    SELECT name, age, breed
     FROM dogs
     ORDER BY age DESC
-    LIMIT 5
+    LIMIT 4
 """, conn2)
 print(df_4_oldest)
 
@@ -138,10 +138,10 @@ print(df_teams_years)
 # STEP 12
 # Replace None with your code
 df_at_bats = pd.read_sql("""
-    SELECT Team, AVG(At_Bats) AS average_at_bats
+    SELECT Team, AVG(AB) AS average_at_bats
     FROM babe_ruth_stats
     GROUP BY Team
-    HAVING AVG(At_Bats) > 200
+    HAVING AVG(AB) > 200
 """, conn3)
 
 conn1.close()
